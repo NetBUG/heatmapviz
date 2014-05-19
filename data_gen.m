@@ -8,19 +8,24 @@
 % 1300557890 320 597 M
 
 function data_gen
+    n = 0;
     %filename = 'points_blacksquare.csv';
     %n = generate(filename, [120 300 100 0.1; 200 350 75 0.3; 400 10 150 0.2]);
     %fprintf(1, '%d users generated for %s', n, filename);
     filename = 'points_venus.csv';
-    n = generate(filename, [400 120 100 0.2; 300 350 75 0.3; 310 370 150 0.2; 210 370 150 0.2]);
+    %n = generate(filename, [400 120 100 0.2; 300 350 75 0.3; 310 370 150 0.2; 210 370 150 0.2]);
     fprintf(1, '%d users generated for %s\n', n, filename);
 
     filename = 'points_dali.csv';
-    n = generate(filename, [300 43 100 0.5]);
+    %n = generate(filename, [300 43 100 0.5]);
     fprintf(1, '%d users generated for %s\n', n, filename);
     
     filename = 'points_pollock.csv';
-    %n = generate(filename, [400 120 100 0.2; 300 350 75 0.3; 310 370 150 0.2; 210 370 150 0.2]);
+    n = generate(filename, [400 120 100 0.2; 300 350 75 0.3; 310 370 150 0.2; 210 370 150 0.2]);
+    fprintf(1, '%d users generated for %s\n', n, filename);
+    
+    filename = 'points_kandinsky.csv';
+    n = generate(filename, [400 120 100 0.2; 300 350 75 0.3; 310 370 150 0.2; 210 370 150 0.2]);
     fprintf(1, '%d users generated for %s\n', n, filename);
     
 end
@@ -54,7 +59,8 @@ function n = generate(filename, points)
         for i = 1:abs(random('norm', 1200, 1500))
             % jumping
             step = abs(round(random('norm', step_mean, step_sigma)));
-            step_p = exp(abs([log(getProb(x+step, y, pds_x, pds_y)) log(getProb(x, y+step, pds_x, pds_y)) log(getProb(x-step, y, pds_x, pds_y)) log(getProb(x, y-step, pds_x, pds_y))]));
+            %step_p = exp(abs([log(getProb(x+step, y, pds_x, pds_y)) log(getProb(x, y+step, pds_x, pds_y)) log(getProb(x-step, y, pds_x, pds_y)) log(getProb(x, y-step, pds_x, pds_y))]));
+            step_p = abs([log(getProb(x+step, y, pds_x, pds_y)) log(getProb(x, y+step, pds_x, pds_y)) log(getProb(x-step, y, pds_x, pds_y)) log(getProb(x, y-step, pds_x, pds_y))]);
             step_p = step_p / sum(step_p);
             [a, nr] = max(random('norm', step_p, [1 1 1 1]));
             switch (nr)
